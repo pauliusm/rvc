@@ -1,15 +1,15 @@
 # Copyright (c) 2011 VMware, Inc.  All Rights Reserved.
-# 
+#
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
 # in the Software without restriction, including without limitation the rights
 # to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 # copies of the Software, and to permit persons to whom the Software is
 # furnished to do so, subject to the following conditions:
-# 
+#
 # The above copyright notice and this permission notice shall be included in
 # all copies or substantial portions of the Software.
-# 
+#
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 # IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 # FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -76,8 +76,8 @@ class RbVmomi::VIM::HostSystem
         conn = vms.first._connection
         pc = conn.propertyCollector
         vmsProps = pc.collectMultiple(vms, 'runtime.powerState')
-        vmsProps.select{|vm, p| p['runtime.powerState'] == 'poweredOn'}.length 
-      end 
+        vmsProps.select{|vm, p| p['runtime.powerState'] == 'poweredOn'}.length
+      end
     end
   end
 
@@ -88,7 +88,7 @@ class RbVmomi::VIM::HostSystem
       if cores && mhz && stats
         value = stats.overallCpuUsage.to_f * 100 / (cores * mhz)
         MetricNumber.new(value, '%')
-      end 
+      end
     end
   end
 
@@ -99,7 +99,7 @@ class RbVmomi::VIM::HostSystem
       if mem && stats
         value = stats.overallMemoryUsage.to_f * 100 / (mem / 1024.0 / 1024.0)
         MetricNumber.new(value, '%')
-      end 
+      end
     end
   end
 
@@ -118,7 +118,7 @@ class RbVmomi::VIM::HostSystem
       end
     end
   end
-  
+
   [['.realtime', 1], ['.5min', 5 * 3], ['.10min', 10 * 3]].each do |label, max_samples|
     field "memusage#{label}" do
       summary "Mem Usage in Percent"
@@ -182,7 +182,7 @@ end
 
 class VIM::EsxcliCommand
   def option_parser
-    parser = Trollop::Parser.new
+    parser = Optimist::Parser.new
     parser.text cli_info.help
     cli_info.param.each do |cli_param|
       vmodl_param = type_info.paramTypeInfo.find { |x| x.name == cli_param.name }

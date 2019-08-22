@@ -9,6 +9,7 @@ begin
     gem.authors = ["Rich Lane", "Christian Dickmann"]
     gem.add_dependency 'rbvmomi', '>= 1.6.0'
     gem.add_dependency 'trollop', '>= 1.16.2'
+    gem.add_dependency 'optimist', '~> 3.0'
     gem.add_dependency 'backports', '>= 1.18.2'
     gem.add_dependency 'highline', '>= 1.6.1'
     gem.add_dependency 'zip', '>= 2.0.2'
@@ -26,7 +27,7 @@ Rake::TestTask.new do |t|
   t.verbose = true
   t.ruby_opts << "-rubygems"
 end
- 
+
 begin
   require 'rcov/rcovtask'
   desc 'Measures test coverage using rcov'
